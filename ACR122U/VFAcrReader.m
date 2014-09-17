@@ -26,7 +26,7 @@
 {
     rv = SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &hContext);
     
-    if ([self successful:@"SCardEstablishContext"])
+    if ([self signalWasSuccessful])
     {
         return [self listReaders];
     }
@@ -38,7 +38,7 @@
 {
     rv = SCardListReaders(hContext, NULL, NULL, &dwReaders);
     
-    if ([self successful:@"SCardListReaders"])
+    if ([self signalWasSuccessful])
     {
         mszReaders = calloc(dwReaders, sizeof(char));
         return [self associateReader];
@@ -51,7 +51,7 @@
 {
     rv = SCardListReaders(hContext, NULL, mszReaders, &dwReaders);
     
-    if ([self successful:@"SCardListReaders"])
+    if ([self signalWasSuccessful])
     {
         NSLog(@"Reader connection: %s", mszReaders);
         attachedReader = [NSString stringWithFormat: @"%s", mszReaders];
@@ -61,15 +61,14 @@
     return NO;
 }
 
-- (BOOL) successful: (NSString *)context
+- (BOOL) signalWasSuccessful
 {
     if (SCARD_S_SUCCESS == rv)
     {
-        NSLog(@"%@ successful", context);
         return YES;
     }
     
-    lastError = [NSString stringWithFormat: @"%@: %s", context, pcsc_stringify_error(rv)];
+    [self executionError];
     return NO;
 }
 
@@ -85,9 +84,14 @@
 
     for (;;)
     {
-
-        usleep(56000);
+        usleep(THREAD_POLL_INTRV);
         rv = SCardGetStatusChange(hContext, INFINITE, &readerState, 1);
+        if (rv != SCARD_S_SUCCESS)
+        {
+            [self executionError];
+            [self close];
+            break; // Exit thread. We are done here.
+        }
 
         if ((readerState.dwEventState & SCARD_STATE_EMPTY) == SCARD_STATE_EMPTY && !isBlank)
         {
@@ -100,21 +104,30 @@
             isBlank = NO;
             [self readCard];
         }
-        
     }
+}
+
+- (void) executionError
+{
+    lastError = [NSString stringWithFormat: @"%s", pcsc_stringify_error(rv)];
 }
 
 - (BOOL) connectCard
 {
-    rv = SCardConnect(hContext, mszReaders, SCARD_SHARE_SHARED, SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1, &hCard, &dwActiveProtocol);
+    rv = SCardConnect(hContext,
+                      mszReaders,
+                      SCARD_SHARE_SHARED,
+                      SCARD_PROTOCOL_T0 | SCARD_PROTOCOL_T1,
+                      &hCard,
+                      &dwActiveProtocol);
     
-    if ([self successful:@"SCardConnect"]) {
+    if ([self signalWasSuccessful]) {
         switch (dwActiveProtocol) {
             case SCARD_PROTOCOL_T0:
-                pioSendPci = * SCARD_PCI_T0;
+                pioSendPci = *SCARD_PCI_T0;
                 break;
             case SCARD_PROTOCOL_T1:
-                pioSendPci = * SCARD_PCI_T1;
+                pioSendPci = *SCARD_PCI_T1;
                 break;
         }
         
@@ -155,14 +168,16 @@
 - (BOOL) sendCmd: (const unsigned char *) cmd cmdLength: (uint8_t) len
 {
     rv = SCardTransmit(hCard, &pioSendPci, cmd, len, NULL, pbRecvBuffer, &dwRecvLength);
-    return [self successful: @"SendCommand"];
+    return [self signalWasSuccessful];
 }
 
 - (void) setCurrentUid
 {
     NSString *tagId = @"";
     for (unsigned int i=0; i < UID_LENGTH; i++) {
-        tagId = [tagId stringByAppendingString:[NSString stringWithFormat:@"%02x", pbRecvBuffer[i]]];
+        tagId = [tagId stringByAppendingString:
+                 [NSString stringWithFormat:@"%02x", pbRecvBuffer[i]]
+                 ];
     }
     NSLog(@"%@", tagId);
     currentTagId = tagId;
@@ -178,19 +193,16 @@
         return YES;
     }
     
-    NSLog(lastError);
+    NSLog(@"%@", lastError);
     return NO;
 }
 
 - (void) close
 {
     NSLog(@"Closing interface.");
-    rv = SCardDisconnect(hCard, SCARD_LEAVE_CARD);
-    [self successful:@"SCardDisconnect"];
-    
+    SCardDisconnect(hCard, SCARD_LEAVE_CARD);
     free(mszReaders);
-    rv = SCardReleaseContext(hContext);
-    [self successful:@"SCardReleaseContext"];
+    SCardReleaseContext(hContext);
 }
 
 - (void) dealloc

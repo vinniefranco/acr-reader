@@ -12,8 +12,10 @@
 #define GET_UID { 0xFF, 0xCA, 0x00, 0x00, 0x00 }
 #define LED_FLASH { 0xFF, 0x00, 0x40, 0xCF, 0x04, 0x01, 0x01, 0x02, 0x01 }
 #define UID_LENGTH 7
+#define THREAD_POLL_INTRV 56000
 
 @interface VFAcrReader : NSObject {
+    @private
     BOOL isRead;
     BOOL isBlank;
     NSString *currentTagId;
