@@ -7,11 +7,14 @@
 //
 
 #import "VFAppDelegate.h"
+#import "VFAcrReader.h"
 
 @implementation VFAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    VFAcrReader *reader = [[VFAcrReader alloc] init];
+    [reader open];
     // Insert code here to initialize your application
 }
 
