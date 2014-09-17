@@ -14,6 +14,18 @@
 #define UID_LENGTH 7
 #define THREAD_POLL_INTRV 56000
 
+@class VFAcrReader;
+
+@protocol VFAcrDelegate <NSObject>
+
+@required
+- (void) readerReceivedNewRFIDTag:(NSString *)tagUid;
+- (void) readerReceivedError:(NSString *)error;
+- (void) readerWasAttached:(NSString *) readerName;
+- (void) readerIsEmpty;
+
+@end
+
 @interface VFAcrReader : NSObject {
     @private
     BOOL isRead;
@@ -30,5 +42,11 @@
     uint8_t pbRecvBuffer[258];
 }
 
+@property (nonatomic, assign) id delegate;
+
 - (BOOL) open;
+- (void) close;
+- (NSString *) getTagUid;
+- (NSString *) getCurrentReaderName;
+- (NSString *) getLastError;
 @end

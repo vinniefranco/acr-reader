@@ -22,6 +22,44 @@
     return self;
 }
 
+- (BOOL) open
+{
+    if ([self connect])
+    {
+        [NSThread detachNewThreadSelector: @selector(poll)
+                                 toTarget: self
+                               withObject: nil];
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void) close
+{
+    NSLog(@"Closing interface.");
+    SCardDisconnect(hCard, SCARD_LEAVE_CARD);
+    free(mszReaders);
+    SCardReleaseContext(hContext);
+}
+
+- (NSString *) getTagUid
+{
+    return currentTagId;
+}
+
+- (NSString *) getCurrentReaderName
+{
+    return attachedReader;
+}
+
+- (NSString *) getLastError
+{
+    return lastError;
+}
+
+// *Private* -----------------------------------------------------------------
+
 - (BOOL) connect
 {
     rv = SCardEstablishContext(SCARD_SCOPE_SYSTEM, NULL, NULL, &hContext);
@@ -55,6 +93,12 @@
     {
         NSLog(@"Reader connection: %s", mszReaders);
         attachedReader = [NSString stringWithFormat: @"%s", mszReaders];
+        
+        if (self.delegate && [self.delegate respondsToSelector:@selector(readerWasAttached:)])
+        {
+            [self.delegate readerWasAttached:attachedReader];
+        }
+
         return YES;
     }
     
@@ -98,6 +142,10 @@
             NSLog(@"Card Absent");
             isRead = NO;
             isBlank = YES;
+            if (self.delegate && [self.delegate respondsToSelector:@selector(readerIsEmpty)])
+            {
+                [self.delegate readerIsEmpty];
+            }
         }
         else if ((readerState.dwEventState & SCARD_STATE_PRESENT) == SCARD_STATE_PRESENT)
         {
@@ -110,6 +158,10 @@
 - (void) executionError
 {
     lastError = [NSString stringWithFormat: @"%s", pcsc_stringify_error(rv)];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(readerReceivedError:)])
+    {
+        [self.delegate readerReceivedError:lastError];
+    }
 }
 
 - (BOOL) connectCard
@@ -173,36 +225,18 @@
 
 - (void) setCurrentUid
 {
-    NSString *tagId = @"";
+    NSMutableString *tagId = [NSMutableString string];
     for (unsigned int i=0; i < UID_LENGTH; i++) {
-        tagId = [tagId stringByAppendingString:
-                 [NSString stringWithFormat:@"%02x", pbRecvBuffer[i]]
-                 ];
-    }
-    NSLog(@"%@", tagId);
-    currentTagId = tagId;
-}
-
-- (BOOL) open
-{
-    if ([self connect])
-    {
-        [NSThread detachNewThreadSelector: @selector(poll)
-                                 toTarget: self
-                               withObject: nil];
-        return YES;
+        [tagId appendFormat:@"%02x", pbRecvBuffer[i]];
     }
     
-    NSLog(@"%@", lastError);
-    return NO;
-}
-
-- (void) close
-{
-    NSLog(@"Closing interface.");
-    SCardDisconnect(hCard, SCARD_LEAVE_CARD);
-    free(mszReaders);
-    SCardReleaseContext(hContext);
+    currentTagId = [NSString stringWithString: tagId];
+    NSLog(@"%@", currentTagId);
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(readerReceivedNewRFIDTag:)])
+    {
+        [self.delegate readerReceivedNewRFIDTag:currentTagId];
+    }
 }
 
 - (void) dealloc
@@ -210,4 +244,5 @@
     [self close];
     [super dealloc];
 }
+
 @end

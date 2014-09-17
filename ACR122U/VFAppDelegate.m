@@ -15,7 +15,16 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     reader = [[VFAcrReader alloc] init];
+    reader.delegate = self;
     [reader open];
+}
+
+- (void) readerWasAttached:(NSString *)readerName {}
+- (void) readerIsEmpty {}
+- (void) readerReceivedNewRFIDTag:(NSString *)tagUid {}
+- (void) readerReceivedError:(NSString *)error
+{
+    NSLog(@"From delegate: %@", error);
 }
 
 @end
