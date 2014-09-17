@@ -15,7 +15,6 @@
 {
     VFAcrReader *reader = [[VFAcrReader alloc] init];
     [reader open];
-    // Insert code here to initialize your application
 }
 
 @end

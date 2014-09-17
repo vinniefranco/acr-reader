@@ -7,7 +7,6 @@
 //
 
 #include <PCSC/winscard.h>
-//#include <PCSC/wintypes.h>
 #import <Foundation/Foundation.h>
 
 #define GET_UID { 0xFF, 0xCA, 0x00, 0x00, 0x00 }
@@ -29,5 +28,5 @@
     uint8_t pbRecvBuffer[258];
 }
 
-- (void) open;
+- (BOOL) open;
 @end

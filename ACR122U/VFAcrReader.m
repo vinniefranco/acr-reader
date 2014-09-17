@@ -14,15 +14,9 @@
 {
     self = [super init];
     
-    if (self && [self connect])
+    if (self)
     {
         isRead = NO;
-        [NSThread detachNewThreadSelector: @selector(poll)
-                                 toTarget: self
-                               withObject: nil];
-    }
-    else {
-        NSLog(lastError);
     }
     
     return self;
@@ -122,7 +116,6 @@
             case SCARD_PROTOCOL_T1:
                 pioSendPci = * SCARD_PCI_T1;
                 break;
-                
         }
         
         dwRecvLength = sizeof(pbRecvBuffer);
@@ -149,9 +142,9 @@
     uint8_t tagUidCmd[] = GET_UID;
     uint8_t flashLed[] = LED_FLASH;
 
-    if ([self sendCommand: tagUidCmd cmdLength: sizeof(tagUidCmd)]) {
+    if ([self sendCmd: tagUidCmd cmdLength: sizeof(tagUidCmd)]) {
         [self setCurrentUid];
-        [self sendCommand:flashLed cmdLength:sizeof(flashLed)];
+        [self sendCmd:flashLed cmdLength:sizeof(flashLed)];
         
         return YES;
     }
@@ -159,7 +152,7 @@
     return NO;
 }
 
-- (BOOL) sendCommand: (const unsigned char *) cmd cmdLength: (uint8_t) len
+- (BOOL) sendCmd: (const unsigned char *) cmd cmdLength: (uint8_t) len
 {
     rv = SCardTransmit(hCard, &pioSendPci, cmd, len, NULL, pbRecvBuffer, &dwRecvLength);
     return [self successful: @"SendCommand"];
@@ -175,8 +168,17 @@
     currentTagId = tagId;
 }
 
-- (void) open
+- (BOOL) open
 {
+    if ([self connect])
+    {
+        [NSThread detachNewThreadSelector: @selector(poll)
+                                 toTarget: self
+                               withObject: nil];
+        return YES;
+    }
     
+    NSLog(lastError);
+    return NO;
 }
 @end
