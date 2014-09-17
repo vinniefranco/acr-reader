@@ -5,7 +5,6 @@
 //  Created by Vincent Franco on 9/12/14.
 //  Copyright (c) 2014 Vincent Franco. All rights reserved.
 //
-
 #import "VFKeyboardEmulator.h"
 
 @implementation VFKeyboardEmulator

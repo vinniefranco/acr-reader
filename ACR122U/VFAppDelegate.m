@@ -11,20 +11,39 @@
 @implementation VFAppDelegate
 
 @synthesize reader;
+@synthesize data;
+@synthesize status;
+@synthesize keyboard;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     reader = [[VFAcrReader alloc] init];
+    keyboard = [[VFKeyboardEmulator alloc] init];
     reader.delegate = self;
+    
     [reader open];
 }
 
-- (void) readerWasAttached:(NSString *)readerName {}
-- (void) readerIsEmpty {}
-- (void) readerReceivedNewRFIDTag:(NSString *)tagUid {}
+- (void) readerWasAttached:(NSString *)readerName
+{
+    [status setStringValue: [NSString stringWithFormat: @"%@ connected",readerName]];
+}
+
+- (void) readerIsEmpty
+{
+    [status setStringValue:@"Reader is empty..."];
+}
+
+- (void) readerReceivedNewRFIDTag:(NSString *)tagUid
+{
+    [data setStringValue:tagUid];
+    [keyboard write:tagUid];
+}
 - (void) readerReceivedError:(NSString *)error
 {
-    NSLog(@"From delegate: %@", error);
+    [data setStringValue:@"..."];
+    [status setStringValue: [NSString stringWithFormat:@"Error: %@", error]];
+    NSLog(@"Error: %@", error);
 }
 
 @end

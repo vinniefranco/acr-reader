@@ -13,6 +13,9 @@
 @interface VFAppDelegate : NSObject <NSApplicationDelegate, VFAcrDelegate>
 
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) IBOutlet NSTextField *data;
+@property (assign) IBOutlet NSTextField *status;
 @property (assign) VFAcrReader *reader;
+@property (assign) VFKeyboardEmulator *keyboard;
 
 @end
