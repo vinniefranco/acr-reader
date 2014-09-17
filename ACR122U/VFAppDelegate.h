@@ -8,10 +8,11 @@
 
 #import <Cocoa/Cocoa.h>
 #import "VFAcrReader.h"
+#import "VFKeyboardEmulator.h"
 
-@interface VFAppDelegate : NSObject <NSApplicationDelegate> {
-    VFAcrReader *reader;
-}
+@interface VFAppDelegate : NSObject <NSApplicationDelegate>
+
 @property (assign) IBOutlet NSWindow *window;
+@property (assign) VFAcrReader *reader;
 
 @end

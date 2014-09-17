@@ -184,7 +184,9 @@
 
 - (void) dealloc
 {
-
+    rv = SCardDisconnect(hCard, SCARD_LEAVE_CARD);
+    [self successful:@"SCardDisconnect"];
+    
     free(mszReaders);
     rv = SCardReleaseContext(hContext);
     [self successful:@"SCardReleaseContext"];

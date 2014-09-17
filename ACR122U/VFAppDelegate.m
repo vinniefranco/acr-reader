@@ -10,16 +10,12 @@
 
 @implementation VFAppDelegate
 
+@synthesize reader;
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     reader = [[VFAcrReader alloc] init];
     [reader open];
-}
-
-- (void) dealloc
-{
-    [reader dealloc];
-    [super dealloc];
 }
 
 @end

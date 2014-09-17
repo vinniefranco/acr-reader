@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "53EE6AAA19C8FAB40097E820"
                BuildableName = "ACR122U.app"
-               BlueprintName = "ACR122U"
-               ReferencedContainer = "container:ACR122U.xcodeproj">
+               BlueprintName = "ACR122 RFID Reader"
+               ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "53EE6ACB19C8FAB40097E820"
                BuildableName = "ACR122UTests.xctest"
-               BlueprintName = "ACR122UTests"
-               ReferencedContainer = "container:ACR122U.xcodeproj">
+               BlueprintName = "ACR122 RFID ReaderTests"
+               ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -44,8 +44,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53EE6AAA19C8FAB40097E820"
             BuildableName = "ACR122U.app"
-            BlueprintName = "ACR122U"
-            ReferencedContainer = "container:ACR122U.xcodeproj">
+            BlueprintName = "ACR122 RFID Reader"
+            ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -63,8 +63,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53EE6AAA19C8FAB40097E820"
             BuildableName = "ACR122U.app"
-            BlueprintName = "ACR122U"
-            ReferencedContainer = "container:ACR122U.xcodeproj">
+            BlueprintName = "ACR122 RFID Reader"
+            ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -81,8 +81,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "53EE6AAA19C8FAB40097E820"
             BuildableName = "ACR122U.app"
-            BlueprintName = "ACR122U"
-            ReferencedContainer = "container:ACR122U.xcodeproj">
+            BlueprintName = "ACR122 RFID Reader"
+            ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
