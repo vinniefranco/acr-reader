@@ -182,14 +182,20 @@
     return NO;
 }
 
-- (void) dealloc
+- (void) close
 {
+    NSLog(@"Closing interface.");
     rv = SCardDisconnect(hCard, SCARD_LEAVE_CARD);
     [self successful:@"SCardDisconnect"];
     
     free(mszReaders);
     rv = SCardReleaseContext(hContext);
     [self successful:@"SCardReleaseContext"];
+}
+
+- (void) dealloc
+{
+    [self close];
     [super dealloc];
 }
 @end
