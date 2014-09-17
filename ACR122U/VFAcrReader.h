@@ -19,7 +19,7 @@
 
 @required
 - (void) readerReceivedNewRFIDTag:(NSString *)tagUid;
-- (void) readerReceivedError:(NSString *)error;
+- (void) readerReceivedError:(NSError *)error;
 - (void) readerWasAttached:(NSString *) readerName;
 - (void) readerIsEmpty;
 @end
@@ -30,7 +30,7 @@
     BOOL isConnected;
     BOOL isBlank;
     NSString *currentTagId;
-    NSString *lastError;
+    NSError *lastError;
     NSString *attachedReader;
     NSThread *pollingThread;
     uint32_t rv;

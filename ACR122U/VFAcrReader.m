@@ -144,12 +144,7 @@
             NSLog(@"Card Absent");
             isRead = NO;
             isBlank = YES;
-            if (self.delegate && [self.delegate respondsToSelector:@selector(readerIsEmpty)])
-            {
-                [self.delegate performSelectorOnMainThread:@selector(readerIsEmpty)
-                                                withObject:nil
-                                             waitUntilDone:YES];
-            }
+            [self performSelectorOnDelegate:@selector(readerIsEmpty) with:nil];
         }
         else if ((readerState.dwEventState & SCARD_STATE_PRESENT) == SCARD_STATE_PRESENT)
         {
@@ -163,14 +158,13 @@
 
 - (void) executionError
 {
-    lastError = [NSString stringWithFormat: @"%s", pcsc_stringify_error(rv)];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(readerReceivedError:)])
-    {
-        [self.delegate performSelectorOnMainThread:@selector(readerReceivedError:)
-                                        withObject:lastError
-                                     waitUntilDone:YES];
-    }
+    lastError = [NSError errorWithDomain:[NSString stringWithFormat:@"%s", pcsc_stringify_error(rv)]
+                                    code:rv
+                                userInfo:nil];
+    
+    [self performSelectorOnDelegate:@selector(readerReceivedError:) with:lastError];
 }
+
 
 - (BOOL) connectCard
 {
@@ -238,19 +232,18 @@
         [tagId appendFormat:@"%02x", pbRecvBuffer[i]];
     }
     
-    currentTagId = [NSString stringWithString: tagId];
-    NSLog(@"%@", currentTagId);
-    
-    if (self.delegate && [self.delegate respondsToSelector:@selector(readerReceivedNewRFIDTag:)])
-    {
-        [self.delegate readerReceivedNewRFIDTag:currentTagId];
-    }
+    currentTagId = [tagId copy];
+    [self performSelectorOnDelegate:@selector(readerReceivedNewRFIDTag:) with:currentTagId];
 }
 
-- (void) dealloc
+- (void) performSelectorOnDelegate: (SEL)selector with: (id)object
 {
-    [self close];
-    [super dealloc];
+    if (self.delegate && [self.delegate respondsToSelector:selector])
+    {
+        [self.delegate performSelectorOnMainThread:selector
+                                        withObject:object
+                                     waitUntilDone:YES];
+    }
 }
 
 @end
