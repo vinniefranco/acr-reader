@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "VFAcrReader.h"
 
-@interface VFAppDelegate : NSObject <NSApplicationDelegate>
-
+@interface VFAppDelegate : NSObject <NSApplicationDelegate> {
+    VFAcrReader *reader;
+}
 @property (assign) IBOutlet NSWindow *window;
 
 @end

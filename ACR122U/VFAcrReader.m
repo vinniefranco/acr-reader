@@ -181,4 +181,13 @@
     NSLog(lastError);
     return NO;
 }
+
+- (void) dealloc
+{
+
+    free(mszReaders);
+    rv = SCardReleaseContext(hContext);
+    [self successful:@"SCardReleaseContext"];
+    [super dealloc];
+}
 @end
