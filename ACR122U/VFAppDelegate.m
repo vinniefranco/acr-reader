@@ -27,7 +27,6 @@
     [segControl setAction:@selector(segControlClicked:)];
     
     reader.delegate = self;
-    
 }
 
 - (void) readerWasAttached:(NSString *)readerName
@@ -57,6 +56,8 @@
     int clickedSegment = [sender selectedSegment];
     int clickedSegmentTag = [[sender cell] tagForSegment:clickedSegment];
     
+    [status setStringValue:@""];
+    [data setStringValue:@""];
     NSLog(@"%d", clickedSegmentTag);
     (clickedSegmentTag == 0) ? [reader open] : [reader close];
 }
