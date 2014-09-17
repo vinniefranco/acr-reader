@@ -27,8 +27,8 @@
     if ([self connect])
     {
         pollingThread = [[NSThread alloc] initWithTarget:self
-                                selector:@selector(poll)
-                                  object:nil];
+                                                selector:@selector(poll)
+                                                  object:nil];
         
         [pollingThread start];
         return YES;
@@ -39,7 +39,6 @@
 
 - (void) close
 {
-    NSLog(@"Closing interface.");
     [pollingThread cancel];
     SCardDisconnect(hCard, SCARD_LEAVE_CARD);
     SCardReleaseContext(hContext);
@@ -55,7 +54,7 @@
     return attachedReader;
 }
 
-- (NSString *) getLastError
+- (NSError *) getLastError
 {
     return lastError;
 }
@@ -93,7 +92,6 @@
     
     if ([self signalWasSuccessful])
     {
-        NSLog(@"Reader connection: %s", mszReaders);
         attachedReader = [NSString stringWithFormat: @"%s", mszReaders];
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(readerWasAttached:)])
@@ -121,8 +119,6 @@
 
 - (void) poll
 {
-    NSLog(@"In thread");
-    
     SCARD_READERSTATE_A readerState;
     readerState.szReader = mszReaders;
     readerState.dwCurrentState = SCARD_STATE_UNAWARE;
@@ -141,7 +137,6 @@
 
         if ((readerState.dwEventState & SCARD_STATE_EMPTY) == SCARD_STATE_EMPTY && !isBlank)
         {
-            NSLog(@"Card Absent");
             isRead = NO;
             isBlank = YES;
             [self performSelectorOnDelegate:@selector(readerIsEmpty) with:nil];
@@ -158,7 +153,9 @@
 
 - (void) executionError
 {
-    lastError = [NSError errorWithDomain:[NSString stringWithFormat:@"%s", pcsc_stringify_error(rv)]
+    NSString *errorDomain = [NSString stringWithFormat:@"%s", pcsc_stringify_error(rv)];
+    
+    lastError = [NSError errorWithDomain:errorDomain
                                     code:rv
                                 userInfo:nil];
     
@@ -175,7 +172,8 @@
                       &hCard,
                       &dwActiveProtocol);
     
-    if ([self signalWasSuccessful]) {
+    if ([self signalWasSuccessful])
+    {
         switch (dwActiveProtocol) {
             case SCARD_PROTOCOL_T0:
                 pioSendPci = *SCARD_PCI_T0;
@@ -194,12 +192,13 @@
 
 - (void) readCard
 {
-    if (isRead) {
+    if (isRead)
+    {
         return;
     }
     
-    NSLog(@"Reading card.");
-    if ([self connectCard] && [self readTagUid]) {
+    if ([self connectCard] && [self readTagUid])
+    {
         isRead = YES;
     }
 }
@@ -209,7 +208,8 @@
     uint8_t tagUidCmd[] = GET_UID;
     uint8_t flashLed[] = LED_FLASH;
 
-    if ([self sendCmd: tagUidCmd cmdLength: sizeof(tagUidCmd)]) {
+    if ([self sendCmd: tagUidCmd cmdLength: sizeof(tagUidCmd)])
+    {
         [self setCurrentUid];
         [self sendCmd:flashLed cmdLength:sizeof(flashLed)];
         

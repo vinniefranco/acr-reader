@@ -48,5 +48,5 @@
 - (void) close;
 - (NSString *) getTagUid;
 - (NSString *) getCurrentReaderName;
-- (NSString *) getLastError;
+- (NSError *) getLastError;
 @end
