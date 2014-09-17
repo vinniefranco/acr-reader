@@ -47,8 +47,7 @@
 - (void) readerReceivedError:(NSString *)error
 {
     [data setStringValue:@"..."];
-    [status setStringValue: [NSString stringWithFormat:@"Error: %@", error]];
-    NSLog(@"Error: %@", error);
+    [status setStringValue: [NSString stringWithFormat:@"Error: %@", error.description]];
 }
 
 - (void) segControlClicked: (id) sender
