@@ -36,18 +36,26 @@
 
 - (void) readerIsEmpty
 {
+    [data setStringValue:@""];
     [status setStringValue:@"Reader is empty..."];
 }
 
 - (void) readerReceivedNewRFIDTag:(NSString *)tagUid
 {
+    [status setStringValue:@"Tag present"];
     [data setStringValue:tagUid];
     [keyboard write:tagUid];
 }
-- (void) readerReceivedError:(NSString *)error
+- (void) readerReceivedError:(NSError *)error
 {
     [data setStringValue:@"..."];
-    [status setStringValue: [NSString stringWithFormat:@"Error: %@", error.description]];
+    NSString *domainError = error.localizedDescription;
+    [status setStringValue: [NSString stringWithFormat:@"%@", domainError]];
+}
+
+- (void) readerHasClosed
+{
+    [segControl setSelectedSegment:1];
 }
 
 - (void) segControlClicked: (id) sender
@@ -62,6 +70,7 @@
     else
     {
         [reader close];
+        [status setStringValue:@""];
     }
 }
 

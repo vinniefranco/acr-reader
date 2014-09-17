@@ -40,7 +40,6 @@
 - (void) close
 {
     [pollingThread cancel];
-    SCardDisconnect(hCard, SCARD_LEAVE_CARD);
     SCardReleaseContext(hContext);
 }
 
@@ -79,7 +78,7 @@
     
     if ([self signalWasSuccessful])
     {
-        mszReaders = calloc(dwReaders, sizeof(char));
+        mszReaders = malloc(sizeof(char) *dwReaders);
         return [self associateReader];
     }
     
@@ -89,6 +88,10 @@
 - (BOOL) associateReader
 {
     rv = SCardListReaders(hContext, NULL, mszReaders, &dwReaders);
+    
+    readerState.szReader = mszReaders;
+    readerState.dwCurrentState = SCARD_STATE_UNAWARE;
+    readerState.dwEventState = SCARD_STATE_UNKNOWN;
     
     if ([self signalWasSuccessful])
     {
@@ -119,11 +122,6 @@
 
 - (void) poll
 {
-    SCARD_READERSTATE_A readerState;
-    readerState.szReader = mszReaders;
-    readerState.dwCurrentState = SCARD_STATE_UNAWARE;
-    readerState.dwEventState = SCARD_STATE_UNKNOWN;
-
     while (! [[NSThread currentThread] isCancelled])
     {
         usleep(THREAD_POLL_INTRV);
@@ -131,8 +129,6 @@
         if (rv != SCARD_S_SUCCESS)
         {
             [self executionError];
-            [self close];
-            break; // Exit thread. We are done here.
         }
 
         if ((readerState.dwEventState & SCARD_STATE_EMPTY) == SCARD_STATE_EMPTY && !isBlank)
@@ -146,6 +142,12 @@
             isBlank = NO;
             [self readCard];
         }
+        else if ((readerState.dwEventState & SCARD_STATE_UNAVAILABLE) == SCARD_STATE_UNAVAILABLE ||
+                 (readerState.dwEventState & SCARD_STATE_FOOBAR) == SCARD_STATE_FOOBAR)
+        {
+            [self stateUnavailableError];
+            break;
+        }        
     }
     
     [NSThread exit];
@@ -154,12 +156,24 @@
 - (void) executionError
 {
     NSString *errorDomain = [NSString stringWithFormat:@"%s", pcsc_stringify_error(rv)];
-    
+ 
+    NSLog(@"CODE: 0x%x %@", rv, errorDomain);
     lastError = [NSError errorWithDomain:errorDomain
                                     code:rv
                                 userInfo:nil];
     
     [self performSelectorOnDelegate:@selector(readerReceivedError:) with:lastError];
+}
+
+- (void) stateUnavailableError
+{
+    lastError = [NSError errorWithDomain:@"Reader state unavailable"
+                                    code:420
+                                userInfo:nil];
+    
+    SCardReleaseContext(hContext);
+    [self performSelectorOnDelegate:@selector(readerReceivedError:) with:lastError];
+    [self performSelectorOnDelegate:@selector(readerHasClosed) with:nil];
 }
 
 
@@ -190,6 +204,12 @@
     return NO;
 }
 
+- (BOOL) disconnectCard
+{
+    rv = SCardDisconnect(hCard, SCARD_LEAVE_CARD);
+    return [self signalWasSuccessful];
+}
+
 - (void) readCard
 {
     if (isRead)
@@ -197,7 +217,7 @@
         return;
     }
     
-    if ([self connectCard] && [self readTagUid])
+    if ([self connectCard] && [self readTagUid] && [self disconnectCard])
     {
         isRead = YES;
     }

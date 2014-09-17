@@ -12,6 +12,7 @@
 #define LED_FLASH { 0xFF, 0x00, 0x40, 0xCF, 0x04, 0x01, 0x01, 0x02, 0x01 }
 #define UID_LENGTH 7
 #define THREAD_POLL_INTRV 56000
+#define SCARD_STATE_FOOBAR 0x06
 
 @class VFAcrReader;
 
@@ -22,6 +23,7 @@
 - (void) readerReceivedError:(NSError *)error;
 - (void) readerWasAttached:(NSString *) readerName;
 - (void) readerIsEmpty;
+- (void) readerHasClosed;
 @end
 
 @interface VFAcrReader : NSObject {
@@ -37,6 +39,7 @@
     SCARDCONTEXT hContext;
     char *mszReaders;
     SCARDHANDLE hCard;
+    SCARD_READERSTATE_A readerState;
     uint32_t dwReaders, dwActiveProtocol, dwRecvLength;
     SCARD_IO_REQUEST pioSendPci;
     uint8_t pbRecvBuffer[258];
