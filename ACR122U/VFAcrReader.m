@@ -15,6 +15,7 @@
     
     if (self)
     {
+        isConnected = NO;
         isRead = NO;
     }
     
@@ -25,9 +26,11 @@
 {
     if ([self connect])
     {
-        [NSThread detachNewThreadSelector: @selector(poll)
-                                 toTarget: self
-                               withObject: nil];
+        pollingThread = [[NSThread alloc] initWithTarget:self
+                                selector:@selector(poll)
+                                  object:nil];
+        
+        [pollingThread start];
         return YES;
     }
     
@@ -37,8 +40,8 @@
 - (void) close
 {
     NSLog(@"Closing interface.");
+    [pollingThread cancel];
     SCardDisconnect(hCard, SCARD_LEAVE_CARD);
-    free(mszReaders);
     SCardReleaseContext(hContext);
 }
 
@@ -125,7 +128,7 @@
     readerState.dwCurrentState = SCARD_STATE_UNAWARE;
     readerState.dwEventState = SCARD_STATE_UNKNOWN;
 
-    for (;;)
+    while (! [[NSThread currentThread] isCancelled])
     {
         usleep(THREAD_POLL_INTRV);
         rv = SCardGetStatusChange(hContext, INFINITE, &readerState, 1);
@@ -143,7 +146,9 @@
             isBlank = YES;
             if (self.delegate && [self.delegate respondsToSelector:@selector(readerIsEmpty)])
             {
-                [self.delegate readerIsEmpty];
+                [self.delegate performSelectorOnMainThread:@selector(readerIsEmpty)
+                                                withObject:nil
+                                             waitUntilDone:YES];
             }
         }
         else if ((readerState.dwEventState & SCARD_STATE_PRESENT) == SCARD_STATE_PRESENT)
@@ -152,6 +157,8 @@
             [self readCard];
         }
     }
+    
+    [NSThread exit];
 }
 
 - (void) executionError
@@ -159,7 +166,9 @@
     lastError = [NSString stringWithFormat: @"%s", pcsc_stringify_error(rv)];
     if (self.delegate && [self.delegate respondsToSelector:@selector(readerReceivedError:)])
     {
-        [self.delegate readerReceivedError:lastError];
+        [self.delegate performSelectorOnMainThread:@selector(readerReceivedError:)
+                                        withObject:lastError
+                                     waitUntilDone:YES];
     }
 }
 

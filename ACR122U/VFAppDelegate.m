@@ -56,10 +56,14 @@
     int clickedSegment = [sender selectedSegment];
     int clickedSegmentTag = [[sender cell] tagForSegment:clickedSegment];
     
-    [status setStringValue:@""];
-    [data setStringValue:@""];
-    NSLog(@"%d", clickedSegmentTag);
-    (clickedSegmentTag == 0) ? [reader open] : [reader close];
+    if (clickedSegmentTag == 0)
+    {
+        [reader open];
+    }
+    else
+    {
+        [reader close];
+    }
 }
 
 @end

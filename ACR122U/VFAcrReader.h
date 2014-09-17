@@ -22,16 +22,17 @@
 - (void) readerReceivedError:(NSString *)error;
 - (void) readerWasAttached:(NSString *) readerName;
 - (void) readerIsEmpty;
-
 @end
 
 @interface VFAcrReader : NSObject {
     @private
     BOOL isRead;
+    BOOL isConnected;
     BOOL isBlank;
     NSString *currentTagId;
     NSString *lastError;
     NSString *attachedReader;
+    NSThread *pollingThread;
     uint32_t rv;
     SCARDCONTEXT hContext;
     char *mszReaders;
