@@ -15,6 +15,7 @@
         <customObject id="Voe-Tx-rLC" customClass="VFAppDelegate">
             <connections>
                 <outlet property="data" destination="m4j-Ox-F6f" id="CdT-AJ-cQb"/>
+                <outlet property="segControl" destination="HV2-1c-h7c" id="zj2-Rh-CMR"/>
                 <outlet property="status" destination="DbA-oU-Pfz" id="gK1-Zy-3ua"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
             </connections>
@@ -711,6 +712,17 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <segmentedControl verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HV2-1c-h7c">
+                        <rect key="frame" x="222" y="9" width="67" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <segmentedCell key="cell" alignment="left" style="texturedSquare" trackingMode="selectOne" id="782-LF-GL7">
+                            <font key="font" metaFont="system"/>
+                            <segments>
+                                <segment label="On" width="32"/>
+                                <segment label="Off" width="32" selected="YES" tag="1"/>
+                            </segments>
+                        </segmentedCell>
+                    </segmentedControl>
                 </subviews>
             </view>
         </window>
