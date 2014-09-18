@@ -9,9 +9,49 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>ACR122UReader.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>FrontProcessKeyboardEmulator.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>53357EB619CA96F8004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53357EC219CA96F8004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53357F1219CAA018004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53357F1E19CAA018004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53357F3A19CAA1D6004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>53357F4619CAA1D7004C280E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>53EE6AAA19C8FAB40097E820</key>
 		<dict>
 			<key>primary</key>

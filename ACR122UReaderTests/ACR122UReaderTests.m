@@ -1,18 +1,18 @@
 //
-//  ACR122UTests.m
-//  ACR122UTests
+//  ACR122UReaderTests.m
+//  ACR122UReaderTests
 //
-//  Created by Vincent Franco on 9/16/14.
+//  Created by Vincent Franco on 9/17/14.
 //  Copyright (c) 2014 Vincent Franco. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
 
-@interface ACR122UTests : XCTestCase
+@interface ACR122UReaderTests : XCTestCase
 
 @end
 
-@implementation ACR122UTests
+@implementation ACR122UReaderTests
 
 - (void)setUp
 {

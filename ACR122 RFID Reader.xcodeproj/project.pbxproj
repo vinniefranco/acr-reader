@@ -7,7 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		538436DE19C92B3B00FF76D6 /* VFKeyboardEmulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 538436DD19C92B3B00FF76D6 /* VFKeyboardEmulator.m */; };
+		53357F1419CAA018004C280E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AAE19C8FAB40097E820 /* Cocoa.framework */; };
+		53357F1A19CAA018004C280E /* ACR122UReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53357F1919CAA018004C280E /* ACR122UReader.m */; };
+		53357F3419CAA0AA004C280E /* PCSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53357F3319CAA0AA004C280E /* PCSC.framework */; };
+		53357F3519CAA0B4004C280E /* libACR122UReader.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53357F1319CAA018004C280E /* libACR122UReader.a */; };
+		53357F3619CAA107004C280E /* PCSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AE219C8FABE0097E820 /* PCSC.framework */; };
+		53357F3C19CAA1D6004C280E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AAE19C8FAB40097E820 /* Cocoa.framework */; };
+		53357F4219CAA1D7004C280E /* FrontProcessKeyboardEmulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 53357F4119CAA1D7004C280E /* FrontProcessKeyboardEmulator.m */; };
+		53357F5B19CAA24C004C280E /* libFrontProcessKeyboardEmulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53357F3B19CAA1D6004C280E /* libFrontProcessKeyboardEmulator.a */; };
 		53EE6AAF19C8FAB40097E820 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AAE19C8FAB40097E820 /* Cocoa.framework */; };
 		53EE6AB919C8FAB40097E820 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53EE6AB719C8FAB40097E820 /* InfoPlist.strings */; };
 		53EE6ABB19C8FAB40097E820 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6ABA19C8FAB40097E820 /* main.m */; };
@@ -17,10 +24,6 @@
 		53EE6AC719C8FAB40097E820 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 53EE6AC619C8FAB40097E820 /* Images.xcassets */; };
 		53EE6ACE19C8FAB40097E820 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6ACD19C8FAB40097E820 /* XCTest.framework */; };
 		53EE6ACF19C8FAB40097E820 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AAE19C8FAB40097E820 /* Cocoa.framework */; };
-		53EE6AD719C8FAB40097E820 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 53EE6AD519C8FAB40097E820 /* InfoPlist.strings */; };
-		53EE6AD919C8FAB40097E820 /* ACR122UTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6AD819C8FAB40097E820 /* ACR122UTests.m */; };
-		53EE6AE319C8FABE0097E820 /* PCSC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53EE6AE219C8FABE0097E820 /* PCSC.framework */; };
-		53EE6AE719C8FAFB0097E820 /* VFAcrReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 53EE6AE619C8FAFB0097E820 /* VFAcrReader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,8 +37,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		538436DC19C92B3300FF76D6 /* VFKeyboardEmulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VFKeyboardEmulator.h; sourceTree = "<group>"; };
-		538436DD19C92B3B00FF76D6 /* VFKeyboardEmulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VFKeyboardEmulator.m; sourceTree = "<group>"; };
+		53357F1319CAA018004C280E /* libACR122UReader.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libACR122UReader.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		53357F1719CAA018004C280E /* ACR122UReader-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ACR122UReader-Prefix.pch"; sourceTree = "<group>"; };
+		53357F1819CAA018004C280E /* ACR122UReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ACR122UReader.h; sourceTree = "<group>"; };
+		53357F1919CAA018004C280E /* ACR122UReader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACR122UReader.m; sourceTree = "<group>"; };
+		53357F3319CAA0AA004C280E /* PCSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PCSC.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.9.sdk/System/Library/Frameworks/PCSC.framework; sourceTree = DEVELOPER_DIR; };
+		53357F3B19CAA1D6004C280E /* libFrontProcessKeyboardEmulator.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFrontProcessKeyboardEmulator.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		53357F3F19CAA1D6004C280E /* FrontProcessKeyboardEmulator-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FrontProcessKeyboardEmulator-Prefix.pch"; sourceTree = "<group>"; };
+		53357F4019CAA1D7004C280E /* FrontProcessKeyboardEmulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrontProcessKeyboardEmulator.h; sourceTree = "<group>"; };
+		53357F4119CAA1D7004C280E /* FrontProcessKeyboardEmulator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FrontProcessKeyboardEmulator.m; sourceTree = "<group>"; };
 		53EE6AAB19C8FAB40097E820 /* ACR122 RFID Reader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ACR122 RFID Reader.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53EE6AAE19C8FAB40097E820 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		53EE6AB119C8FAB40097E820 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -52,21 +62,35 @@
 		53EE6AC619C8FAB40097E820 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		53EE6ACC19C8FAB40097E820 /* ACR122 RFID ReaderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ACR122 RFID ReaderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		53EE6ACD19C8FAB40097E820 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		53EE6AD419C8FAB40097E820 /* ACR122 RFID ReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ACR122 RFID ReaderTests-Info.plist"; sourceTree = "<group>"; };
-		53EE6AD619C8FAB40097E820 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		53EE6AD819C8FAB40097E820 /* ACR122UTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ACR122UTests.m; sourceTree = "<group>"; };
 		53EE6AE219C8FABE0097E820 /* PCSC.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PCSC.framework; path = System/Library/Frameworks/PCSC.framework; sourceTree = SDKROOT; };
-		53EE6AE519C8FAFB0097E820 /* VFAcrReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VFAcrReader.h; sourceTree = "<group>"; };
-		53EE6AE619C8FAFB0097E820 /* VFAcrReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VFAcrReader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		53357F1019CAA018004C280E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53357F3419CAA0AA004C280E /* PCSC.framework in Frameworks */,
+				53357F1419CAA018004C280E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53357F3819CAA1D6004C280E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53357F3C19CAA1D6004C280E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53EE6AA819C8FAB40097E820 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EE6AE319C8FABE0097E820 /* PCSC.framework in Frameworks */,
+				53357F3619CAA107004C280E /* PCSC.framework in Frameworks */,
 				53EE6AAF19C8FAB40097E820 /* Cocoa.framework in Frameworks */,
+				53357F5B19CAA24C004C280E /* libFrontProcessKeyboardEmulator.a in Frameworks */,
+				53357F3519CAA0B4004C280E /* libACR122UReader.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,11 +106,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53357F1519CAA018004C280E /* ACR122UReader */ = {
+			isa = PBXGroup;
+			children = (
+				53357F1819CAA018004C280E /* ACR122UReader.h */,
+				53357F1919CAA018004C280E /* ACR122UReader.m */,
+				53357F1619CAA018004C280E /* Supporting Files */,
+			);
+			path = ACR122UReader;
+			sourceTree = SOURCE_ROOT;
+		};
+		53357F1619CAA018004C280E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				53357F1719CAA018004C280E /* ACR122UReader-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		53357F3D19CAA1D6004C280E /* FrontProcessKeyboardEmulator */ = {
+			isa = PBXGroup;
+			children = (
+				53357F4019CAA1D7004C280E /* FrontProcessKeyboardEmulator.h */,
+				53357F4119CAA1D7004C280E /* FrontProcessKeyboardEmulator.m */,
+				53357F3E19CAA1D6004C280E /* Supporting Files */,
+			);
+			name = FrontProcessKeyboardEmulator;
+			path = ../FrontProcessKeyboardEmulator;
+			sourceTree = "<group>";
+		};
+		53357F3E19CAA1D6004C280E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				53357F3F19CAA1D6004C280E /* FrontProcessKeyboardEmulator-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		53357F5D19CAA2C8004C280E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				53357F3D19CAA1D6004C280E /* FrontProcessKeyboardEmulator */,
+				53357F1519CAA018004C280E /* ACR122UReader */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
 		53EE6AA219C8FAB40097E820 = {
 			isa = PBXGroup;
 			children = (
 				53EE6AB419C8FAB40097E820 /* ACR122U */,
-				53EE6AD219C8FAB40097E820 /* ACR122UTests */,
 				53EE6AAD19C8FAB40097E820 /* Frameworks */,
 				53EE6AAC19C8FAB40097E820 /* Products */,
 			);
@@ -97,6 +166,8 @@
 			children = (
 				53EE6AAB19C8FAB40097E820 /* ACR122 RFID Reader.app */,
 				53EE6ACC19C8FAB40097E820 /* ACR122 RFID ReaderTests.xctest */,
+				53357F1319CAA018004C280E /* libACR122UReader.a */,
+				53357F3B19CAA1D6004C280E /* libFrontProcessKeyboardEmulator.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -104,6 +175,7 @@
 		53EE6AAD19C8FAB40097E820 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				53357F3319CAA0AA004C280E /* PCSC.framework */,
 				53EE6AE219C8FABE0097E820 /* PCSC.framework */,
 				53EE6AAE19C8FAB40097E820 /* Cocoa.framework */,
 				53EE6ACD19C8FAB40097E820 /* XCTest.framework */,
@@ -125,7 +197,7 @@
 		53EE6AB419C8FAB40097E820 /* ACR122U */ = {
 			isa = PBXGroup;
 			children = (
-				53EE6AE419C8FAD80097E820 /* Library */,
+				53357F5D19CAA2C8004C280E /* Libraries */,
 				53EE6AC019C8FAB40097E820 /* VFAppDelegate.h */,
 				53EE6AC119C8FAB40097E820 /* VFAppDelegate.m */,
 				53EE6AC319C8FAB40097E820 /* MainMenu.xib */,
@@ -147,38 +219,60 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		53EE6AD219C8FAB40097E820 /* ACR122UTests */ = {
-			isa = PBXGroup;
-			children = (
-				53EE6AD819C8FAB40097E820 /* ACR122UTests.m */,
-				53EE6AD319C8FAB40097E820 /* Supporting Files */,
-			);
-			path = ACR122UTests;
-			sourceTree = "<group>";
-		};
-		53EE6AD319C8FAB40097E820 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				53EE6AD419C8FAB40097E820 /* ACR122 RFID ReaderTests-Info.plist */,
-				53EE6AD519C8FAB40097E820 /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		53EE6AE419C8FAD80097E820 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				53EE6AE519C8FAFB0097E820 /* VFAcrReader.h */,
-				53EE6AE619C8FAFB0097E820 /* VFAcrReader.m */,
-				538436DC19C92B3300FF76D6 /* VFKeyboardEmulator.h */,
-				538436DD19C92B3B00FF76D6 /* VFKeyboardEmulator.m */,
-			);
-			name = Library;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		53357F1119CAA018004C280E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53357F3919CAA1D6004C280E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		53357F1219CAA018004C280E /* ACR122UReader */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53357F2D19CAA018004C280E /* Build configuration list for PBXNativeTarget "ACR122UReader" */;
+			buildPhases = (
+				53357F0F19CAA018004C280E /* Sources */,
+				53357F1019CAA018004C280E /* Frameworks */,
+				53357F1119CAA018004C280E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ACR122UReader;
+			productName = ACR122UReader;
+			productReference = 53357F1319CAA018004C280E /* libACR122UReader.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		53357F3A19CAA1D6004C280E /* FrontProcessKeyboardEmulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 53357F5519CAA1D7004C280E /* Build configuration list for PBXNativeTarget "FrontProcessKeyboardEmulator" */;
+			buildPhases = (
+				53357F3719CAA1D6004C280E /* Sources */,
+				53357F3819CAA1D6004C280E /* Frameworks */,
+				53357F3919CAA1D6004C280E /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FrontProcessKeyboardEmulator;
+			productName = FrontProcessKeyboardEmulator;
+			productReference = 53357F3B19CAA1D6004C280E /* libFrontProcessKeyboardEmulator.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		53EE6AAA19C8FAB40097E820 /* ACR122 RFID Reader */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 53EE6ADC19C8FAB40097E820 /* Build configuration list for PBXNativeTarget "ACR122 RFID Reader" */;
@@ -244,6 +338,8 @@
 			targets = (
 				53EE6AAA19C8FAB40097E820 /* ACR122 RFID Reader */,
 				53EE6ACB19C8FAB40097E820 /* ACR122 RFID ReaderTests */,
+				53357F1219CAA018004C280E /* ACR122UReader */,
+				53357F3A19CAA1D6004C280E /* FrontProcessKeyboardEmulator */,
 			);
 		};
 /* End PBXProject section */
@@ -264,20 +360,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EE6AD719C8FAB40097E820 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		53357F0F19CAA018004C280E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53357F1A19CAA018004C280E /* ACR122UReader.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		53357F3719CAA1D6004C280E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				53357F4219CAA1D7004C280E /* FrontProcessKeyboardEmulator.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		53EE6AA719C8FAB40097E820 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				53EE6AC219C8FAB40097E820 /* VFAppDelegate.m in Sources */,
-				538436DE19C92B3B00FF76D6 /* VFKeyboardEmulator.m in Sources */,
-				53EE6AE719C8FAFB0097E820 /* VFAcrReader.m in Sources */,
 				53EE6ABB19C8FAB40097E820 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +395,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				53EE6AD919C8FAB40097E820 /* ACR122UTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -325,17 +433,61 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		53EE6AD519C8FAB40097E820 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				53EE6AD619C8FAB40097E820 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		53357F2E19CAA018004C280E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACR122UReader/ACR122UReader-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		53357F2F19CAA018004C280E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "ACR122UReader/ACR122UReader-Prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		53357F5619CAA1D7004C280E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FrontProcessKeyboardEmulator/FrontProcessKeyboardEmulator-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		53357F5719CAA1D7004C280E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FrontProcessKeyboardEmulator/FrontProcessKeyboardEmulator-Prefix.pch";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 		53EE6ADA19C8FAB40097E820 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -447,7 +599,7 @@
 		53EE6AE019C8FAB40097E820 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACR122U.app/Contents/MacOS/ACR122U";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACR122 RFID Reader.app/Contents/MacOS/ACR122 RFID Reader";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -469,7 +621,7 @@
 		53EE6AE119C8FAB40097E820 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACR122U.app/Contents/MacOS/ACR122U";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/ACR122 RFID Reader.app/Contents/MacOS/ACR122 RFID Reader";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -487,6 +639,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		53357F2D19CAA018004C280E /* Build configuration list for PBXNativeTarget "ACR122UReader" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53357F2E19CAA018004C280E /* Debug */,
+				53357F2F19CAA018004C280E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		53357F5519CAA1D7004C280E /* Build configuration list for PBXNativeTarget "FrontProcessKeyboardEmulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				53357F5619CAA1D7004C280E /* Debug */,
+				53357F5719CAA1D7004C280E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		53EE6AA619C8FAB40097E820 /* Build configuration list for PBXProject "ACR122 RFID Reader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

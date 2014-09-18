@@ -18,8 +18,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    reader = [[VFAcrReader alloc] init];
-    keyboard = [[VFKeyboardEmulator alloc] init];
+    reader = [[ACR122UReader alloc] init];
+    keyboard = [[FrontProcessKeyboardEmulator alloc] init];
     
     [[segControl cell] setTag:0 forSegment:0];
     [[segControl cell] setTag:1 forSegment:1];

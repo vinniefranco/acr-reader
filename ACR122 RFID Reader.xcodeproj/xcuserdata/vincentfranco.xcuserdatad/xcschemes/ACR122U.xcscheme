@@ -38,6 +38,26 @@
                ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "53357F1E19CAA018004C280E"
+               BuildableName = "ACR122UReaderTests.xctest"
+               BlueprintName = "ACR122UReaderTests"
+               ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "53357F4619CAA1D7004C280E"
+               BuildableName = "FrontProcessKeyboardEmulatorTests.xctest"
+               BlueprintName = "FrontProcessKeyboardEmulatorTests"
+               ReferencedContainer = "container:ACR122 RFID Reader.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

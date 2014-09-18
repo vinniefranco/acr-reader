@@ -14,7 +14,7 @@
 #define THREAD_POLL_INTRV 56000
 #define SCARD_STATE_FOOBAR 0x06
 
-@class VFAcrReader;
+@class ACR122UReader;
 
 @protocol VFAcrDelegate <NSObject>
 
@@ -26,8 +26,8 @@
 - (void) readerHasClosed;
 @end
 
-@interface VFAcrReader : NSObject {
-    @private
+@interface ACR122UReader : NSObject {
+@private
     BOOL isRead;
     BOOL isConnected;
     BOOL isBlank;

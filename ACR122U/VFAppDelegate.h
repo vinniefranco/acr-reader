@@ -7,8 +7,8 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "VFAcrReader.h"
-#import "VFKeyboardEmulator.h"
+#import "ACR122UReader.h"
+#import "FrontProcessKeyboardEmulator.h"
 
 @interface VFAppDelegate : NSObject <NSApplicationDelegate, VFAcrDelegate>
 
@@ -16,7 +16,7 @@
 @property (assign) IBOutlet NSTextField *data;
 @property (assign) IBOutlet NSTextField *status;
 @property (assign) IBOutlet NSSegmentedControl *segControl;
-@property (assign) VFAcrReader *reader;
-@property (assign) VFKeyboardEmulator *keyboard;
+@property (assign) ACR122UReader *reader;
+@property (assign) FrontProcessKeyboardEmulator *keyboard;
 
 @end

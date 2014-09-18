@@ -5,9 +5,9 @@
 //  Created by Vincent Franco on 9/16/14.
 //  Copyright (c) 2014 Vincent Franco. All rights reserved.
 //
-#import "VFAcrReader.h"
+#import "ACR122UReader.h"
 
-@implementation VFAcrReader
+@implementation ACR122UReader
 
 - (id) init
 {
@@ -101,7 +101,7 @@
         {
             [self.delegate readerWasAttached:attachedReader];
         }
-
+        
         return YES;
     }
     
@@ -130,7 +130,7 @@
         {
             [self executionError];
         }
-
+        
         if ((readerState.dwEventState & SCARD_STATE_EMPTY) == SCARD_STATE_EMPTY && !isBlank)
         {
             isRead = NO;
@@ -147,7 +147,7 @@
         {
             [self stateUnavailableError];
             break;
-        }        
+        }
     }
     
     [NSThread exit];
@@ -156,7 +156,7 @@
 - (void) executionError
 {
     NSString *errorDomain = [NSString stringWithFormat:@"%s", pcsc_stringify_error(rv)];
- 
+    
     NSLog(@"CODE: 0x%x %@", rv, errorDomain);
     lastError = [NSError errorWithDomain:errorDomain
                                     code:rv
@@ -227,7 +227,7 @@
 {
     uint8_t tagUidCmd[] = GET_UID;
     uint8_t flashLed[] = LED_FLASH;
-
+    
     if ([self sendCmd: tagUidCmd cmdLength: sizeof(tagUidCmd)])
     {
         [self setCurrentUid];
